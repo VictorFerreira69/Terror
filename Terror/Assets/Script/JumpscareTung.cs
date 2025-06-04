@@ -2,42 +2,56 @@ using UnityEngine;
 using UnityEngine.UI;
 public class JumpscareTung : MonoBehaviour,IInteractable
 {
-    [Header("Animação e Som")]
+    [Header("Câmeras")]
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private Camera jumpscareCamera;
+
+    [Header("Animatronic e Som")]
+    [SerializeField] private GameObject animatronicModel;
     [SerializeField] private Animator jumpscareAnimator;
     [SerializeField] private string animationTrigger = "StartJumpscare";
-    [SerializeField] private AudioSource jumpscareSom;
+    [SerializeField] private AudioSource jumpscareSound;
 
-    [Header("Imagem de Jumpscare")]
-    [SerializeField] private Image jumpscareImage;
+    [Header("Duraçao da animaçao")]
     [SerializeField] private float displayTime = 2f;
+
+    [Header("Fundo preto")]
+    [SerializeField] GameObject fundoPreto;
 
     private bool triggered = false;
 
-    public void Trigger()
-    {
-        if (triggered) return;
-        triggered = true;
+  public void Trigger()
+{
+    if (triggered) return;
+    triggered = true;
 
-       
-        if (jumpscareAnimator != null)
-            jumpscareAnimator.SetTrigger(animationTrigger);
-    }
+    if (mainCamera != null) mainCamera.gameObject.SetActive(false);
+    if (jumpscareCamera != null) jumpscareCamera.gameObject.SetActive(true);
 
-   
-    public void ShowJumpscareImage()
-    {
-        if (jumpscareImage != null)
-            jumpscareImage.gameObject.SetActive(true);
+    if (animatronicModel != null)
+        animatronicModel.SetActive(true);
 
-        if (jumpscareSom != null)
-            jumpscareSom.Play();
+        if(fundoPreto != null)
+        fundoPreto.SetActive(true);
 
-        Invoke(nameof(HideJumpscareImage), displayTime);
-    }
+    if (jumpscareAnimator != null)
+        jumpscareAnimator.SetTrigger(animationTrigger);
 
-    private void HideJumpscareImage()
-    {
-        if (jumpscareImage != null)
-            jumpscareImage.gameObject.SetActive(false);
-    }
+    if (jumpscareSound != null)
+        jumpscareSound.Play();
+
+    Invoke(nameof(EndJumpscare), displayTime);
+}
+
+private void EndJumpscare()
+{
+    if (animatronicModel != null)
+        animatronicModel.SetActive(false);
+
+           if(fundoPreto != null)
+        fundoPreto.SetActive(false);
+
+    if (mainCamera != null) mainCamera.gameObject.SetActive(true);
+    if (jumpscareCamera != null) jumpscareCamera.gameObject.SetActive(false);
+}
 }

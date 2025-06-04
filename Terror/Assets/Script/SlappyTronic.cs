@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class TungShaur : MonoBehaviour
+public class SlappyTronic : MonoBehaviour
 {
-    [Header("Detecção do Jogador")]
+    [Header("Detectar o player")]
     [SerializeField] private float detectionRange = 3f;
 
-    [Tooltip("Referência ao jogador (arraste via Inspector)")]
+    [Header("Referência player")]
     [SerializeField] private Transform player;
 
-    [Header("Componente de Jumpscare")]
+    [Header("Componente  Jumpscare")]
     [SerializeField] private MonoBehaviour jumpscareComponent;
 
     private IInteractable jumpscare;
