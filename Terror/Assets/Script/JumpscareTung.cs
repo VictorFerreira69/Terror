@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-public class JumpscareTung : MonoBehaviour,IInteractable
+public class JumpscareSlappy : MonoBehaviour,IInteractable
 {
     [Header("Câmeras")]
     [SerializeField] private Camera mainCamera;
