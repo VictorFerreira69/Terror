@@ -2,35 +2,52 @@ using UnityEngine;
 
 public class PortaController : MonoBehaviour,IPorta
 {
-    [Header("Referência a Porta")]
-    [SerializeField] private Transform porta;
+    [System.Serializable]
+    public class PortaData
+    {
+        public Transform porta;
+        public Vector3 posicaoAberta;
+        public Vector3 posicaoFechada;
+        public Vector3 destino;
+    }
 
-    [Header("Posião")]
-    [SerializeField] private Vector3 posicaoAberta;
-    [SerializeField] private Vector3 posicaoFechada;
+    [Header("Portas de segurança")]
+    [SerializeField] private PortaData[] portas;
 
     [Header("Configuração")]
     [SerializeField] private float velocidade = 2f;
 
-    private Vector3 destino;
-
     private void Start()
     {
-        destino = posicaoFechada;
+       
+        foreach (var p in portas)
+        {
+            p.destino = p.posicaoAberta;
+        }
     }
 
     private void Update()
     {
-        porta.localPosition = Vector3.Lerp(porta.localPosition, destino, Time.deltaTime * velocidade);
+        foreach (var p in portas)
+        {
+            if (p.porta != null)
+                p.porta.localPosition = Vector3.Lerp(p.porta.localPosition, p.destino, Time.deltaTime * velocidade);
+        }
     }
 
     public void Open()
     {
-        destino = posicaoAberta;
+        foreach (var p in portas)
+        {
+            p.destino = p.posicaoAberta;
+        }
     }
 
     public void Close()
     {
-        destino = posicaoFechada;
+        foreach (var p in portas)
+        {
+            p.destino = p.posicaoFechada;
+        }
     }
 }
