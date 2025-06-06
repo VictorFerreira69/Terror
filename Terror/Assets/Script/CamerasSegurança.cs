@@ -1,12 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
+
 public class CamerasSegurança : MonoBehaviour
 {
-    [Header(" Painel das Cameras")]
+    [Header(" Painel das Camera")]
     [SerializeField] private GameObject cameraUI;
 
     [Header("Cameras de Segurança")]
     [SerializeField] private Camera[] securityCameras;
+    
+    [Header("Player")]
+   [SerializeField] private FirstPersonController move;
 
     private int currentCamIndex = 0;
     private bool isCameraActive = false;
@@ -15,6 +19,7 @@ public class CamerasSegurança : MonoBehaviour
     {
         cameraUI.SetActive(false);
         SetAllCameras(false);
+       
     }
 
     void Update()
@@ -22,10 +27,13 @@ public class CamerasSegurança : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             ToggleCameraSystem(true);
+           move.playerCanMove = false;
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && isCameraActive)
         {
             ToggleCameraSystem(false);
+            move.playerCanMove = true;
+           
         }
 
         if (isCameraActive)
