@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Lixeira : MonoBehaviour,IDepositavel
 {
+    [Header("Distancia para colocar na lixeira")]
     [SerializeField] private float distanciaDeposito = 2f;
 
     private void Update()

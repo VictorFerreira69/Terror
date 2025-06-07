@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class LuzMapa : MonoBehaviour,ILuz
 {
+    [Header("Luz")]
     private Light luz;
 
     private void Awake()
