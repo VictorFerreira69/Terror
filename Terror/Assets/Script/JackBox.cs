@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class JackBox : MonoBehaviour,IAtivar
+public class JackBox : MonoBehaviour,IInteractable
 {
-    [Header("Animaçao")]
+    [Header("Animação")]
     private Animator animator;
 
     [Header("Som")]
     private AudioSource audioSource;
 
-    [Header("Ativar a animaçao")]
+    [Header("Ativar a animação")]
     private bool isActivated = false;
 
     void Start()
@@ -17,7 +17,7 @@ public class JackBox : MonoBehaviour,IAtivar
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void Activate()
+    public void Trigger()
     {
         if (isActivated) return;
 
@@ -25,7 +25,6 @@ public class JackBox : MonoBehaviour,IAtivar
         animator.SetTrigger("PopOut");
         audioSource.Play();
 
-        
         float animLength = animator.GetCurrentAnimatorStateInfo(0).length;
         Invoke(nameof(StopSound), animLength);
     }

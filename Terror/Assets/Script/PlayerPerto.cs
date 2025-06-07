@@ -8,12 +8,12 @@ public class PlayerPerto : MonoBehaviour
    [Header("Distancia pra ativar a animaçao")]
    [SerializeField]float activationDistance = 4f;
 
-    private IAtivar activatable;
+    private IInteractable trigger;
     private bool hasActivated = false;
 
     void Start()
     {
-        activatable = GetComponent<IAtivar>();
+       trigger = GetComponent<IInteractable>();
 
         
     }
@@ -25,7 +25,7 @@ public class PlayerPerto : MonoBehaviour
         float distance = Vector3.Distance(transform.position, player.position);
         if (distance <= activationDistance)
         {
-            activatable.Activate();
+            trigger.Trigger();
             hasActivated = true;
         }
     }

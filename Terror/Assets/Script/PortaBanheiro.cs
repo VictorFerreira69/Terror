@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PortaBanheiro : MonoBehaviour,IPorta
 {
-    [Header("Referência player")]
+    [Header("Player")]
     [SerializeField] private Transform jogador;
 
     [Header("Rotação da Porta")]

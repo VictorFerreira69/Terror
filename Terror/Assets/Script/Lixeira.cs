@@ -27,7 +27,10 @@ public class Lixeira : MonoBehaviour,IDepositavel
 
     public void Depositar(PlayerColetar player)
     {
-        player.RemoverSacola();
-        
-    }
+     player.RemoverSacola();
+
+     MissaoLixo missao = FindObjectOfType<MissaoLixo>();
+     if (missao != null)
+        missao.LixoDepositado();
+     }
 }

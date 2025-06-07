@@ -20,7 +20,8 @@ public class PlayerColetar : MonoBehaviour
          if (Input.GetButtonDown("Fire1"))
         {
          TentarDepositar();
-          TentarColetar();
+         TentarColetar();
+         TentarAjustarCadeira();
         }
 
        
@@ -38,6 +39,18 @@ public class PlayerColetar : MonoBehaviour
                 coletavel.Coletar(this);
             }
         }
+    }
+     private void TentarAjustarCadeira()
+   {
+     Ray ray = new Ray(camera.transform.position, camera.transform.forward);
+     if (Physics.Raycast(ray, out RaycastHit hit, alcanceColeta))
+     {
+        IAjustar ajustavel = hit.collider.GetComponent<IAjustar>();
+        if (ajustavel != null)
+        {
+            ajustavel.Ajustar();
+        }
+     }
     }
 
     public void AdicionarLixo()

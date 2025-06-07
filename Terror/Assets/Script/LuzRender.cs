@@ -2,9 +2,15 @@ using UnityEngine;
 
 public class LuzRender : MonoBehaviour,ILuz
 {
-    private void Awake()
+   
+     private void Start()
     {
-        ConfigurarLuz.instancia.Registrar(this);
+      
+        if (ConfigurarLuz.instancia != null)
+        {
+           ConfigurarLuz.instancia.Registrar(this);
+        }
+       
     }
 
     public void Desligar()
