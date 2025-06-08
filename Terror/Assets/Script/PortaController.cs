@@ -14,7 +14,7 @@ public class PortaController : MonoBehaviour,IPorta
     [Header("Portas de segurança")]
     [SerializeField] private PortaData[] portas;
 
-    [Header("Configuração")]
+    [Header("velocidade para decer e subir")]
     [SerializeField] private float velocidade = 2f;
 
     private void Start()
@@ -33,6 +33,18 @@ public class PortaController : MonoBehaviour,IPorta
             if (p.porta != null)
                 p.porta.localPosition = Vector3.Lerp(p.porta.localPosition, p.destino, Time.deltaTime * velocidade);
         }
+    }
+     public bool IsOpen()
+     {
+    if (portas.Length == 0) return false;
+    return portas[0].destino == portas[0].posicaoAberta;
+    }
+    public void TryClose(bool podeFechar)
+   {
+    if (podeFechar)
+        Close();
+    else
+        Open();
     }
 
     public void Open()
