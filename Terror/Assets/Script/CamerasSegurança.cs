@@ -3,14 +3,17 @@ using UnityEngine.UI;
 
 public class CamerasSegurança : MonoBehaviour
 {
-    [Header(" Painel das Camera")]
+    [Header("Painel das Câmeras")]
     [SerializeField] private GameObject cameraUI;
 
-    [Header("Cameras de Segurança")]
+    [Header("Câmeras de Segurança")]
     [SerializeField] private Camera[] securityCameras;
-    
+
+    [Header("Botões das Câmeras")]
+    [SerializeField] private Button[] cameraButtons; 
+
     [Header("Player")]
-   [SerializeField] private FirstPersonController move;
+    [SerializeField] private FirstPersonController move;
 
     private int currentCamIndex = 0;
     private bool isCameraActive = false;
@@ -19,7 +22,15 @@ public class CamerasSegurança : MonoBehaviour
     {
         cameraUI.SetActive(false);
         SetAllCameras(false);
-       
+
+      
+        for (int i = 0; i < cameraButtons.Length; i++)
+        {
+            int index = i; 
+            
+            cameraButtons[i].onClick.AddListener(() => SwitchToCamera(index));
+             
+        }
     }
 
     void Update()
@@ -27,13 +38,12 @@ public class CamerasSegurança : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             ToggleCameraSystem(true);
-           move.playerCanMove = false;
+            move.playerCanMove = false;
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && isCameraActive)
         {
             ToggleCameraSystem(false);
             move.playerCanMove = true;
-           
         }
 
         if (isCameraActive)
@@ -80,6 +90,16 @@ public class CamerasSegurança : MonoBehaviour
         securityCameras[currentCamIndex].gameObject.SetActive(true);
     }
 
+    public void SwitchToCamera(int index)
+    {
+        if (index >= 0 && index < securityCameras.Length)
+        {
+            SetAllCameras(false);
+            currentCamIndex = index;
+            securityCameras[currentCamIndex].gameObject.SetActive(true);
+        }
+    }
+
     void SetAllCameras(bool state)
     {
         foreach (Camera cam in securityCameras)
@@ -88,4 +108,3 @@ public class CamerasSegurança : MonoBehaviour
         }
     }
 }
-
