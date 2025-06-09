@@ -11,6 +11,9 @@ public class JackBox : MonoBehaviour,IInteractable
     [Header("Ativar a animação")]
     private bool isActivated = false;
 
+    [Header("Audio clip")]
+    [SerializeField] AudioClip clip;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -27,6 +30,10 @@ public class JackBox : MonoBehaviour,IInteractable
 
         float animLength = animator.GetCurrentAnimatorStateInfo(0).length;
         Invoke(nameof(StopSound), animLength);
+    }
+    public void AtivarSom()
+    {
+        audioSource.PlayOneShot(clip);
     }
 
     private void StopSound()
