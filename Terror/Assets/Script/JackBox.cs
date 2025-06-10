@@ -26,13 +26,14 @@ public class JackBox : MonoBehaviour,IInteractable
 
         isActivated = true;
         animator.SetTrigger("PopOut");
-        audioSource.Play();
+      
 
         float animLength = animator.GetCurrentAnimatorStateInfo(0).length;
         Invoke(nameof(StopSound), animLength);
     }
     public void AtivarSom()
     {
+        audioSource.Play();
         audioSource.PlayOneShot(clip);
     }
 

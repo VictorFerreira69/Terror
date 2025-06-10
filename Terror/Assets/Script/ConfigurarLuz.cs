@@ -23,5 +23,9 @@ public class ConfigurarLuz : MonoBehaviour
         {
             luz.Desligar();
         }
+         if (ControladorAnimatronic.instancia != null)
+        {
+        ControladorAnimatronic.instancia.AtivarTodos();
+     }
     }
 }
