@@ -17,7 +17,7 @@ public class Animatronics : MonoBehaviour,IAnimatronic
     [Header("Player")]
     [SerializeField] Transform player;
 
-    [Header("Pontos Patrulha")]
+    [Header("Patrulha")]
     [SerializeField] Transform[] patrolPoints;
 
     [Header("Animator")]
@@ -122,23 +122,36 @@ public class Animatronics : MonoBehaviour,IAnimatronic
         SetState(AnimatronicsStatus.Patrol);
     }
 
-    public void Looking()
+  public void Looking()
+{
+    Vector3 directionToPlayer = (player.position - transform.position).normalized;
+    float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+    Vector3 eyePosition = transform.position + Vector3.up * 1.8f; 
+
+    if (Physics.Raycast(eyePosition, directionToPlayer, out RaycastHit hit, distanceToPlayer))
     {
-        if (Physics.Linecast(transform.position, player.position, out RaycastHit hit))
+        if (hit.transform == player)
         {
-            if (hit.transform == player)
-            {
-                if (state != AnimatronicsStatus.Chase)
-                    SetState(AnimatronicsStatus.Chase);
-            }
-            else if (state == AnimatronicsStatus.Chase)
-            {
+            
+            
+            if (state != AnimatronicsStatus.Chase)
+                SetState(AnimatronicsStatus.Chase);
+        }
+        else
+        {
+           
+            if (state == AnimatronicsStatus.Chase)
                 SetState(AnimatronicsStatus.Search);
-            }
         }
     }
-
-    public void IniciarJumpscare()
+    else
+    {
+       
+        if (state == AnimatronicsStatus.Chase)
+            SetState(AnimatronicsStatus.Search);
+    }
+}
+   public void IniciarJumpscare()
     {
         if (emJumpscare) return;
 
