@@ -18,6 +18,7 @@ public class Dialogo : MonoBehaviour
 
     [Header("Player nao se mover")]
     [SerializeField] private FirstPersonController move;
+    
 
     [Header("Text")]
     [SerializeField] private TMP_Text dialogText;
@@ -38,7 +39,7 @@ public class Dialogo : MonoBehaviour
     {
         yield return new WaitUntil(() =>
             !introAnimator.GetCurrentAnimatorStateInfo(0).IsName(animationName) ||
-            introAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+            introAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 10f);
 
         IniciarDialogoIntro();
     }
