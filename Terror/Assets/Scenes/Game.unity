@@ -80666,12 +80666,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introAnimator: {fileID: 1954419671}
-  animationName: Intro
-  dialogText: {fileID: 1350714245}
-  playerLines:
-  - Vamos la,esta na hora de eu limpar  as mesas que ainda estao com comida e jogalas
-    fora.
+  animationName: Comeco
+  dialogoIntro:
+  - Hora de limpar.
+  dialogoPosLuz:
+  - eita
+  tempoPorLinha: 5
   move: {fileID: 1954419658}
+  dialogText: {fileID: 1350714245}
 --- !u!95 &1954419671
 Animator:
   serializedVersion: 7
@@ -87639,6 +87641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d7236fcbf98b8f44aa8292b4f688436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogo: {fileID: 1954419670}
 --- !u!1 &2073408484
 GameObject:
   m_ObjectHideFlags: 0

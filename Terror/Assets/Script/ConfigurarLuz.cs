@@ -6,6 +6,9 @@ public class ConfigurarLuz : MonoBehaviour
 
     private List<ILuz> luzes = new List<ILuz>();
 
+    [Header("Quando a luz desliga vai ativa isso")]
+    [SerializeField] private Dialogo dialogo;
+
     private void Awake()
     {
         instancia = this;
@@ -23,9 +26,16 @@ public class ConfigurarLuz : MonoBehaviour
         {
             luz.Desligar();
         }
-         if (ControladorAnimatronic.instancia != null)
+
+        if (ControladorAnimatronic.instancia != null)
         {
-        ControladorAnimatronic.instancia.AtivarTodos();
-     }
+            ControladorAnimatronic.instancia.AtivarTodos();
+        }
+
+        if (dialogo != null)
+        {
+            dialogo.IniciarDialogoPosLuz();
+        }
     }
 }
+
