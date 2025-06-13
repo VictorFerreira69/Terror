@@ -39,6 +39,10 @@ public class Animatronics : MonoBehaviour,IAnimatronic
     [SerializeField] GameObject mainCamera;
     [SerializeField] GameObject jumpscareCamera;
 
+    [Header("Jumpscare Audio")]
+   [SerializeField] AudioClip jumpscareSom;
+  [SerializeField] AudioSource audioSource;
+
     private AnimatronicsStatus state;
     private bool emJumpscare = false;
 
@@ -152,29 +156,36 @@ public class Animatronics : MonoBehaviour,IAnimatronic
     }
 }
    public void IniciarJumpscare()
+   {
+    if (emJumpscare) return;
+
+    emJumpscare = true;
+    agent.isStopped = true;
+    animator.SetTrigger("Jumpscare");
+
+   
+    if (audioSource != null && jumpscareSom != null)
     {
-        if (emJumpscare) return;
-
-        emJumpscare = true;
-        agent.isStopped = true;
-        animator.SetTrigger("Jumpscare");
-
-       
-        if (mainCamera != null) mainCamera.SetActive(false);
-        if (jumpscareCamera != null) jumpscareCamera.SetActive(true);
-
-        
-        if (jumpscareTimeline != null)
-        {
-            jumpscareTimeline.Play();
-            StartCoroutine(EsperarTimeline(jumpscareTimeline.duration));
-        }
-        else
-        {
-            
-            Invoke(nameof(CarregarCenaGameOver), 2f);
-        }
+        audioSource.clip = jumpscareSom;
+        audioSource.Play();
     }
+
+    
+    if (mainCamera != null) mainCamera.SetActive(false);
+    if (jumpscareCamera != null) jumpscareCamera.SetActive(true);
+
+    
+    if (jumpscareTimeline != null)
+    {
+        jumpscareTimeline.Play();
+        StartCoroutine(EsperarTimeline(jumpscareTimeline.duration));
+    }
+    else
+    {
+        Invoke(nameof(CarregarCenaGameOver), 3f);
+    }
+}
+
 
     IEnumerator EsperarTimeline(double duracao)
     {

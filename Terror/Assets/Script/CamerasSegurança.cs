@@ -15,6 +15,13 @@ public class CamerasSegurança : MonoBehaviour
     [Header("Player")]
     [SerializeField] private FirstPersonController move;
 
+    [Header("Sistema de Bateria")]
+    [SerializeField] private BateriaController bateriaController;
+
+ [Header("Consumo por segundo quando as câmeras estão ativas")]
+  [SerializeField] private float consumoCamerasPorSegundo = 5f;
+
+
     private int currentCamIndex = 0;
     private bool isCameraActive = false;
 
@@ -46,17 +53,22 @@ public class CamerasSegurança : MonoBehaviour
             move.playerCanMove = true;
         }
 
-        if (isCameraActive)
-        {
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                SwitchCamera(1);
-            }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                SwitchCamera(-1);
-            }
-        }
+       if (isCameraActive)
+{
+    if (Input.GetKeyDown(KeyCode.RightArrow))
+    {
+        SwitchCamera(1);
+    }
+    else if (Input.GetKeyDown(KeyCode.LeftArrow))
+    {
+        SwitchCamera(-1);
+    }
+
+    if (bateriaController != null)
+    {
+        bateriaController.energiaAtual -= consumoCamerasPorSegundo * Time.deltaTime;
+    }
+}
     }
 
     void ToggleCameraSystem(bool state)

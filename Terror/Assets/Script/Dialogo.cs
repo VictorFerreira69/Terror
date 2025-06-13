@@ -1,102 +1,86 @@
 using UnityEngine;
-using UnityEngine.Events;
 using TMPro;
-using UnityEngine.UI;
 using System.Collections;
+
 public class Dialogo : MonoBehaviour
 {
-    [Header("Animação do player no inicio")]
-    [SerializeField] private Animator introAnimator;
-    [SerializeField] private string animationName = "Comeco";
+    [Header("Começo")]
+    [TextArea] [SerializeField] string dialogoIntro; 
+  [SerializeField] float tempoPorLinha = 5f;
 
-    [Header("Diálogo Começo")]
-    [SerializeField] private string[] dialogoIntro;
+    [Header("Depois da  luz acabar")]
+    [TextArea]  [SerializeField] string dialogoPosLuz;
+    [SerializeField] TextMeshProUGUI dialogText;
 
-    [Header("Diálogo quando a luz se apagar")]
-    [SerializeField] private string[] dialogoPosLuz;
-    [SerializeField] private float tempoPorLinha = 6f;
+    private bool dialogoPosLuzAtivo = false;
 
-    [Header("Player nao se mover")]
-    [SerializeField] private FirstPersonController move;
-    
+    [Header("Player")]
+    [SerializeField] FirstPersonController move;
 
-    [Header("Text")]
-    [SerializeField] private TMP_Text dialogText;
-
-    private bool isDialogActive = false;
-    private int currentLine = 0;
-    private Coroutine dialogCoroutine;
+    private bool esperandoInput = false;
 
     void Start()
     {
-        dialogText.gameObject.SetActive(false);
-        move.playerCanMove = true; 
+        if (dialogText != null)
+            dialogText.gameObject.SetActive(false);
 
-        StartCoroutine(EsperarAnimacaoAcabar());
+        if (move == null)
+            move = FindObjectOfType<FirstPersonController>();
+
+        StartCoroutine(FluxoInicial());
     }
 
-    IEnumerator EsperarAnimacaoAcabar()
+    IEnumerator FluxoInicial()
     {
-        yield return new WaitUntil(() =>
-            !introAnimator.GetCurrentAnimatorStateInfo(0).IsName(animationName) ||
-            introAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 10f);
+        
+        if (move != null)
+            move.playerCanMove = false;
 
-        IniciarDialogoIntro();
-    }
-
-    void IniciarDialogoIntro()
-    {
-        isDialogActive = true;
-        move.playerCanMove = false; 
-        currentLine = 0;
-        dialogText.gameObject.SetActive(true);
-        dialogText.text = dialogoIntro[currentLine];
-    }
-
-    void Update()
-    {
-        if (isDialogActive && Input.GetButtonDown("Fire1"))
+        
+        if (dialogText != null)
         {
-            currentLine++;
-
-            if (currentLine >= dialogoIntro.Length)
-            {
-                FinalizarDialogoIntro();
-            }
-            else
-            {
-                dialogText.text = dialogoIntro[currentLine];
-            }
+            dialogText.text = dialogoIntro;
+            dialogText.gameObject.SetActive(true);
         }
+
+        esperandoInput = true;
+
+        
+        while (esperandoInput)
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                esperandoInput = false;
+            }
+            yield return null;
+        }
+
+        
+        if (dialogText != null)
+            dialogText.gameObject.SetActive(false);
+
+        
+        if (move != null)
+            move.playerCanMove = true;
     }
 
-    void FinalizarDialogoIntro()
-    {
-        dialogText.gameObject.SetActive(false);
-        isDialogActive = false;
-        move.playerCanMove = true; 
-    }
-
-    
     public void IniciarDialogoPosLuz()
     {
-        if (dialogCoroutine != null)
-            StopCoroutine(dialogCoroutine);
-
-        dialogCoroutine = StartCoroutine(DialogoAutomaticoPosLuz());
+        if (!dialogoPosLuzAtivo)
+        {
+            dialogoPosLuzAtivo = true;
+            StartCoroutine(DialogoDepoisDaLuz());
+        }
     }
 
-    private IEnumerator DialogoAutomaticoPosLuz()
+    IEnumerator DialogoDepoisDaLuz()
     {
-        dialogText.gameObject.SetActive(true);
-
-        foreach (string linha in dialogoPosLuz)
+        if (dialogText != null)
         {
-            dialogText.text = linha;
+            dialogText.text = dialogoPosLuz;
+            dialogText.gameObject.SetActive(true);
             yield return new WaitForSeconds(tempoPorLinha);
+            dialogText.gameObject.SetActive(false);
         }
-
-        dialogText.gameObject.SetActive(false);
-        dialogCoroutine = null;
     }
 }

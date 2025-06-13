@@ -24,4 +24,9 @@ public class LuzMapa : MonoBehaviour,ILuz
         if (luz != null)
             luz.enabled = false;
     }
+   public void Ligar()
+{
+    if (luz != null)
+            luz.enabled = true;
+}
 }

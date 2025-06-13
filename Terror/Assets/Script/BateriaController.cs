@@ -20,6 +20,7 @@ public class BateriaController : MonoBehaviour
     [Header("Energia consumida quando as  duas portas estao fechadas")]
     public float consumoRapidoPorSegundo = 20f;
 
+  
     [Header("UI")]
     public TextMeshProUGUI textoBateria;
 
@@ -62,6 +63,8 @@ public class BateriaController : MonoBehaviour
         {
            
         }
+        
+
        
     }
     

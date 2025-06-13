@@ -28,18 +28,20 @@ public class PlayerColetar : MonoBehaviour
     }
     
 
-    private void TentarColetar()
+   private void TentarColetar()
+{
+    if (TemSacola()) return;
+
+    Ray ray = new Ray(camera.transform.position, camera.transform.forward);
+    if (Physics.Raycast(ray, out RaycastHit hit, alcanceColeta))
     {
-        Ray ray = new Ray(camera.transform.position, camera.transform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, alcanceColeta))
+        IColetavel coletavel = hit.collider.GetComponent<IColetavel>();
+        if (coletavel != null)
         {
-            IColetavel coletavel = hit.collider.GetComponent<IColetavel>();
-            if (coletavel != null)
-            {
-                coletavel.Coletar(this);
-            }
+            coletavel.Coletar(this);
         }
     }
+}
      private void TentarAjustarCadeira()
    {
      Ray ray = new Ray(camera.transform.position, camera.transform.forward);

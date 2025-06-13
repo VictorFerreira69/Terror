@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour
 {
-    public void Recomeçar()
+    public void Recomecar()
     {
         SceneManager.LoadScene("Game");
     }

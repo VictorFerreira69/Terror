@@ -17,4 +17,8 @@ public class LuzRender : MonoBehaviour,ILuz
     {
         RenderSettings.ambientIntensity = 0.92f; 
     }
+     public void Ligar()
+    {
+        RenderSettings.ambientIntensity = 2.71f;
+    }
 }
