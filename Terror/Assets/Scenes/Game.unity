@@ -56680,7 +56680,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350714243}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1.6485386e-11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56688,7 +56688,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -472, y: -173}
+  m_AnchoredPosition: {x: -524.8951, y: -156.71327}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1350714245
@@ -56711,8 +56711,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Vamos la,esta na hora de eu limpar  as messas que ainda estao com comida
-    e jogalas fora.
+  m_text: "Ah! O que aconteceu? A luz apagou bem na hora que eu tava limpando. Beleza,
+    tenho que achar 3 fus\xEDveis aqui e colocar na caixa de fus\xEDveis pra reativar
+    as luzes"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 85ed64716f1554445bb2e8ee47c4b750, type: 2}
   m_sharedMaterial: {fileID: -6055460425285357584, guid: 85ed64716f1554445bb2e8ee47c4b750, type: 2}
@@ -56739,8 +56740,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38.9
-  m_fontSizeBase: 38.9
+  m_fontSize: 33.3
+  m_fontSizeBase: 33.3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -56777,7 +56778,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 115.42972, y: 0, z: -827.3621, w: -76.381355}
+  m_margin: {x: 115.42972, y: 0, z: -903.8381, w: -76.381355}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -81345,9 +81346,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81842305578d6e3478e5c9a4409e11ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogoIntro: ooi
-  tempoPorLinha: 3
-  dialogoPosLuz: oiii
+  dialogoIntro: "Agora que a festa acabou, t\xE1 na hora de dar um jeio nos lixos
+    das mesas aqui. Tem bastante comida que sofrou espalhada, n\xE3o posso deixar
+    isso ficar estragando. Vou jogo tudo no lixo"
+  tempoPorLinha: 6
+  dialogoPosLuz: "Ah! O que aconteceu? A luz apagou bem na hora que eu tava limpando.
+    Beleza, tenho que achar 3 fus\xEDveis aqui e colocar na caixa de fus\xEDveis
+    pra reativar as luzes"
   dialogText: {fileID: 1350714245}
   move: {fileID: 1954419658}
 --- !u!1 &1954441225
